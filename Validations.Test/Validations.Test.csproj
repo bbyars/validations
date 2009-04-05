@@ -45,6 +45,7 @@
     <Compile Include="DependsOnAttributeTest.cs" />
     <Compile Include="InAttributeTest.cs" />
     <Compile Include="MatchesAttributeTest.cs" />
+    <Compile Include="MaxLengthAttributeTest.cs" />
     <Compile Include="NotificationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequiredAttributeTest.cs" />
