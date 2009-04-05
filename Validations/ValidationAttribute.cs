@@ -6,9 +6,14 @@ namespace Validations
 	[AttributeUsage(AttributeTargets.Property)]
 	public abstract class ValidationAttribute : Attribute
 	{
-		protected abstract bool IsValid(object rawValue);
-		public abstract string Message { get; }
+		protected ValidationAttribute(string errorMessage)
+		{
+			Message = errorMessage;
+		}
 
+		protected abstract bool IsValid(object rawValue);
+
+		public string Message { get; private set; }
 		public PropertyInfo Property { get; set; }
 
 		public void Validate(object target, Notification notification)

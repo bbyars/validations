@@ -16,12 +16,18 @@ namespace Validations.Test
 			AssertValidation(attribute, caller, propertyName, Assert.IsFalse);
 		}
 
-		private static void AssertValidation(ValidationAttribute attribute, object caller, 
-			string propertyName, Action<bool> asserter)
+		public static Notification GetNotification(ValidationAttribute attribute, object caller, string propertyName)
 		{
 			var notification = new Notification();
 			attribute.Property = caller.GetType().GetProperty(propertyName);
 			attribute.Validate(caller, notification);
+			return notification;
+		}
+
+		private static void AssertValidation(ValidationAttribute attribute, object caller, 
+			string propertyName, Action<bool> asserter)
+		{
+			var notification = GetNotification(attribute, caller, propertyName);
 			asserter(notification.HasMessage(propertyName, attribute.Message));
 		}
 	}

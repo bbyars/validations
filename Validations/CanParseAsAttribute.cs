@@ -9,7 +9,11 @@ namespace Validations
         
 		private readonly MethodInfo parseMethod;
         
-		public CanParseAsAttribute(Type type)
+		public CanParseAsAttribute(Type type) : this(type, MESSAGE)
+		{
+		}
+
+		public CanParseAsAttribute(Type type, string message) : base(message)
 		{
 			parseMethod = type.GetMethod("Parse", new[] { typeof(string) });
 			if (parseMethod == null)
@@ -31,11 +35,6 @@ namespace Validations
 			{
 				return false;
 			}
-		}
-
-		public override string Message
-		{
-			get { return MESSAGE; }
 		}
 	}
 }

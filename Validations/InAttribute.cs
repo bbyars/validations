@@ -24,7 +24,11 @@ namespace Validations
 
 		private readonly ArrayList validValues;
 
-		public InAttribute(params object[] validValues)
+		public InAttribute(params object[] validValues) : this(ErrorMessage(validValues), validValues)
+		{
+		}
+
+		public InAttribute(string message, params object[] validValues) : base(message)
 		{
 			this.validValues = new ArrayList(validValues);
 		}
@@ -36,11 +40,6 @@ namespace Validations
 				return true;
 
 			return validValues.Contains(rawValue);
-		}
-
-		public override string Message
-		{
-			get { return ErrorMessage(validValues); }
 		}
 	}
 }
