@@ -1,4 +1,5 @@
 *.resharper
+StyleCop.Cache
 *.suo
 *.user
 bin/

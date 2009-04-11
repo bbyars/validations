@@ -5,74 +5,74 @@ using Validations.Test;
 
 namespace Validations.Test
 {
-	[TestFixture]
-	public class CanParseAsAttributeTest
-	{
-		public string NullString
-		{
-			get { return null; }
-		}
+    [TestFixture]
+    public class CanParseAsAttributeTest
+    {
+        public string NullString
+        {
+            get { return null; }
+        }
 
-		[Test]
-		public void NullValuesAreValid()
-		{
-			var attribute = new CanParseAsAttribute(typeof (int));
-			ValidationAssert.IsValid(attribute, this, "NullString");
-		}
+        [Test]
+        public void NullValuesAreValid()
+        {
+            var attribute = new CanParseAsAttribute(typeof(int));
+            ValidationAssert.IsValid(attribute, this, "NullString");
+        }
 
-		public string EmptyString
-		{
-			get { return ""; }
-		}
+        public string EmptyString
+        {
+            get { return ""; }
+        }
 
-		[Test]
-		public void EmptyValuesAreValid()
-		{
-			var attribute = new CanParseAsAttribute(typeof(int));
-			ValidationAssert.IsValid(attribute, this, "EmptyString");
-		}
-        
-		public string InvalidNumber
-		{
-			get { return "thirtyFive"; }
-		}
-        
-		[Test]
-		public void InvalidNumberIsNotValid()
-		{
-			var attribute = new CanParseAsAttribute(typeof(int));
-			ValidationAssert.IsNotValid(attribute, this, "InvalidNumber");
-		}
-        
-		public string ValidNumber
-		{
-			get { return "35"; }
-		}
-        
-		[Test]
-		public void ValidNumberIsValid()
-		{
-			var attribute = new CanParseAsAttribute(typeof(int));
-			ValidationAssert.IsValid(attribute, this, "ValidNumber");
-		}
-        
-		public string ValidNumberWithSpaces
-		{
-			get { return " 35 "; }
-		}
-        
-		[Test]
-		public void ValidNumberWithSpacesIsValid()
-		{
-			var attribute = new CanParseAsAttribute(typeof(int));
-			ValidationAssert.IsValid(attribute, this, "ValidNumberWithSpaces");
-		}
-        
-		[Test]
-		[ExpectedException(typeof(ArgumentException))]
-		public void InvalidType()
-		{
-			new CanParseAsAttribute(GetType());
-		}
-	}
+        [Test]
+        public void EmptyValuesAreValid()
+        {
+            var attribute = new CanParseAsAttribute(typeof(int));
+            ValidationAssert.IsValid(attribute, this, "EmptyString");
+        }
+
+        public string InvalidNumber
+        {
+            get { return "thirtyFive"; }
+        }
+
+        [Test]
+        public void InvalidNumberIsNotValid()
+        {
+            var attribute = new CanParseAsAttribute(typeof(int));
+            ValidationAssert.IsNotValid(attribute, this, "InvalidNumber");
+        }
+
+        public string ValidNumber
+        {
+            get { return "35"; }
+        }
+
+        [Test]
+        public void ValidNumberIsValid()
+        {
+            var attribute = new CanParseAsAttribute(typeof(int));
+            ValidationAssert.IsValid(attribute, this, "ValidNumber");
+        }
+
+        public string ValidNumberWithSpaces
+        {
+            get { return " 35 "; }
+        }
+
+        [Test]
+        public void ValidNumberWithSpacesIsValid()
+        {
+            var attribute = new CanParseAsAttribute(typeof(int));
+            ValidationAssert.IsValid(attribute, this, "ValidNumberWithSpaces");
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TypeWithNoParseMethod()
+        {
+            new CanParseAsAttribute(GetType());
+        }
+    }
 }

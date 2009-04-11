@@ -1,20 +1,23 @@
+using System;
+
 namespace Validations
 {
-	public class RequiredAttribute : ValidationAttribute
-	{
-		public const string MESSAGE = "Required Field";
+    [AttributeUsage(AttributeTargets.Property)]
+    public sealed class RequiredAttribute : ValidationAttribute
+    {
+        public const string DefaultMessage = "Required Field";
 
-		public RequiredAttribute() : this(MESSAGE)
-		{
-		}
+        public RequiredAttribute() : this(DefaultMessage)
+        {
+        }
 
-		public RequiredAttribute(string message) : base(message)
-		{
-		}
+        public RequiredAttribute(string message) : base(message)
+        {
+        }
 
-		protected override bool IsValid(object rawValue)
-		{
-			return !IsMissing(rawValue);
-		}
-	}
+        protected override bool IsValid(object rawValue)
+        {
+            return !IsMissing(rawValue);
+        }
+    }
 }
