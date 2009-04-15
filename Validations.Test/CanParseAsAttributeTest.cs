@@ -70,9 +70,10 @@ namespace Validations.Test
 
         [Test]
         [ExpectedException(typeof(ArgumentException))]
-        public void TypeWithNoParseMethod()
+        public void TypeWithNoParseMethodThrowsException()
         {
-            new CanParseAsAttribute(GetType());
+            var attribute = new CanParseAsAttribute(GetType());
+            ValidationAssert.IsNotValid(attribute, this, "ValidNumber");
         }
     }
 }

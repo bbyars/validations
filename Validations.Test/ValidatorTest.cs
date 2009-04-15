@@ -47,7 +47,7 @@ namespace Validations.Test
         {
             var obj = new ValidatorTestClass { InheritedField = "A" };
             var notification = Validator.Validate(obj);
-            Assert.IsTrue(notification.HasMessage("InheritedField", BetweenAttribute.ErrorMessage(0, 9)), "missing between");
+            Assert.IsTrue(notification.HasMessage("InheritedField", BetweenAttribute.DefaultErrorMessage(0, 9)), "missing between");
             Assert.IsTrue(notification.HasMessage("ZipCode", RequiredAttribute.DefaultMessage), "missing required");
         }
 
@@ -80,7 +80,7 @@ namespace Validations.Test
         {
             var obj = new ValidatorTestClass { InheritedField = "A" };
             var notification = Validator.ValidateProperty(obj, "InheritedField");
-            Assert.IsTrue(notification.HasMessage("InheritedField", BetweenAttribute.ErrorMessage(0, 9)));
+            Assert.IsTrue(notification.HasMessage("InheritedField", BetweenAttribute.DefaultErrorMessage(0, 9)));
         }
 
         [Test]
@@ -103,7 +103,7 @@ namespace Validations.Test
         {
             var obj = new ValidatorTestClass { ValidateField = true, Field = "A" };
             var notification = Validator.ValidateProperty(obj, "Field");
-            Assert.IsTrue(notification.HasMessage("Field", BetweenAttribute.ErrorMessage(0, 9)));
+            Assert.IsTrue(notification.HasMessage("Field", BetweenAttribute.DefaultErrorMessage(0, 9)));
         }
 
         [Test]

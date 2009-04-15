@@ -1,5 +1,4 @@
 using System;
-using System.Globalization;
 using System.Reflection;
 
 namespace Validations
@@ -9,7 +8,7 @@ namespace Validations
     {
         public const string DefaultMessage = "Invalid format";
 
-        private readonly MethodInfo parseMethod;
+        private readonly Type type;
 
         public CanParseAsAttribute(Type type) : this(type, DefaultMessage)
         {
@@ -17,9 +16,7 @@ namespace Validations
 
         public CanParseAsAttribute(Type type, string message) : base(message)
         {
-            parseMethod = type.GetMethod("Parse", new[] { typeof(string), typeof(IFormatProvider) });
-            if (parseMethod == null)
-                throw new ArgumentException("The given type must have a public static Parse method.");
+            this.type = type;
         }
 
         protected override bool IsValid(object rawValue)
@@ -30,12 +27,11 @@ namespace Validations
 
             try
             {
-                parseMethod.Invoke(null, new[] { rawValue, CultureInfo.CurrentCulture });
+                new Parser().Parse(rawValue.ToString(), type);
                 return true;
             }
-            catch (TargetInvocationException ex)
+            catch (FormatException)
             {
-                Console.WriteLine(ex.GetType().Name);
                 return false;
             }
         }

@@ -16,6 +16,23 @@ namespace Validations.Test
             AssertValidation(attribute, caller, propertyName, Assert.IsFalse);
         }
 
+        public static void ThrowsException(ValidationAttribute attribute, object caller, string propertyName, Type expectedException)
+        {
+            attribute.Property = caller.GetType().GetProperty(propertyName);
+            try
+            {
+                attribute.Validate(caller, new Notification());
+                Assert.Fail("Expected exception");
+            }
+            catch (Exception ex)
+            {
+                if (ex.GetType() == typeof(AssertionException))
+                    throw;
+
+                Assert.IsInstanceOfType(expectedException, ex);
+            }
+        }
+
         public static Notification GetNotification(ValidationAttribute attribute, object caller, string propertyName)
         {
             var notification = new Notification();

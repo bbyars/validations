@@ -86,5 +86,12 @@ namespace Validations.Test
             var notification = ValidationAssert.GetNotification(attribute, this, "TooHigh");
             Assert.AreEqual("Not in range", notification.GetMessageFor("TooHigh", ""));
         }
+        
+        [Test]
+        public void ThrowsExceptionIfTypesAreNotComparable()
+        {
+            var attribute = new BetweenAttribute(new object(), new object());
+            ValidationAssert.ThrowsException(attribute, this, "Date", typeof(ArgumentException));
+        }
     }
 }
