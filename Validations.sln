@@ -5,6 +5,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Validations", "Validations\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Validations.Test", "Validations.Test\Validations.Test.csproj", "{92E6D908-15F6-47E6-B105-73C6205F902B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1C8DDF46-82FE-4222-AA42-AABDF002CB1A}"
+	ProjectSection(SolutionItems) = preProject
+		CONTRIBUTORS = CONTRIBUTORS
+		LICENSE = LICENSE
+		README = README
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
